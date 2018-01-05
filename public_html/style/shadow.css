@@ -1,42 +1,45 @@
 .elevation-0 {
     z-index: 0;
     box-shadow:  0px 0px 0px 0px rgba(0, 0, 0, 0.2) }
-.elevation-1, button.raised.disabled {
+.elevation-1, button, button:not([disabled]):hover {
     z-index: 100;
     box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14),
     0px 2px 1px -1px rgba(0, 0, 0, 0.12); }
-.elevation-2, button.floating.disabled, button.raised, .window, .window.disabled:hover {
+.elevation-2, button.raised, .window {
     z-index: 200;
     box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14),
     0px 3px 1px -2px rgba(0, 0, 0, 0.12); }
-.elevation-3, .window:hover {
+.elevation-3, .window:not(.disabled):hover {
     z-index: 300;
     box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.2),
     0px 3px 4px 0px rgba(0, 0, 0, 0.14),
     0px 3px 3px -2px rgba(0, 0, 0, 0.12); }
-.elevation-4, button.floating, button.raised:focus, .active.elevation-0:hover, .window.active {
+.elevation-4,
+.active.elevation-0:hover,
+.window:not(.disabled).active,
+button.raised:not([disabled]):hover {
     z-index: 400;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14),
     0px 1px 10px 0px rgba(0, 0, 0, 0.12); }
-.elevation-5, .active.elevation-1:hover, button.raised:hover {
+.elevation-5, .active.elevation-1:hover {
     z-index: 500;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 5px 8px 0px rgba(0, 0, 0, 0.14),
     0px 1px 14px 0px rgba(0, 0, 0, 0.12); }
-.elevation-6, .active.elevation-2:hover, button.floating:focus {
+.elevation-6, .active.elevation-2:hover {
     z-index: 600;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 6px 10px 0px rgba(0, 0, 0, 0.14),
     0px 1px 18px 0px rgba(0, 0, 0, 0.12); }
-.elevation-7, .active.elevation-3:hover, button.floating:hover {
+.elevation-7, .active.elevation-3:hover {
     z-index: 700;
     box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
     0px 7px 10px 1px rgba(0, 0, 0, 0.14),
     0px 2px 16px 1px rgba(0, 0, 0, 0.12); }
-.elevation-8, .active.elevation-4:hover, .menu-0 {
+.elevation-8, .active.elevation-4:hover, button.floating, .menu-0 {
     z-index: 800;
     box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
     0px 8px 10px 1px rgba(0, 0, 0, 0.14),
@@ -46,7 +49,7 @@
     box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2),
     0px 9px 12px 1px rgba(0, 0, 0, 0.14),
     0px 3px 16px 2px rgba(0, 0, 0, 0.12); }
-.elevation-10, .active.elevation-6:hover, .menu-2 {
+.elevation-10, .active.elevation-6:hover, button.floating:not([disabled]):hover, .menu-2 {
     z-index: 1000;
     box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2),
     0px 10px 14px 1px rgba(0, 0, 0, 0.14),

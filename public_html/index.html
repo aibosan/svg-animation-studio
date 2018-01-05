@@ -16,19 +16,14 @@
     </head>
     <body>
         <div id="initialLoader">
-            <button id="testbutton" class="button">Loading...</button>
+            <button class="black">Black</button>
+            <button class="">White</button>
+            <button class="black" disabled="disabled">Black disabled</button>
+            <button class="" disabled="disabled">White disabled</button>
+            <button class="black raised">Black raised</button>
+            <button class="raised">White raised</button>
+            <button class="black floating">Black floating</button>
+            <button class="floating">White floating</button>
         </div>
-        <script>
-            var butt = document.getElementById("testbutton");
-            butt.no = 0;
-            setInterval(function() {
-                this.classList.remove("elevation-"+this.no);
-                this.no++;
-                if(this.no > 24) {
-                    this.no = 0;
-                }
-                this.classList.add("elevation-"+this.no);
-            }.bind(butt), 500);
-            </script>
     </body>
 </html>

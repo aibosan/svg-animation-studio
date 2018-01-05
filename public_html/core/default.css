@@ -14,7 +14,6 @@ body {
     text-align: center;
 }
 #initialLoader button {
-    position: absolute !important;
     top: 50%;
     transform: translateY(-50%);
 }
