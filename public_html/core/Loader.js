@@ -13,7 +13,9 @@ function Loader() {
 Loader.prototype.addList = function(listURL, resolve, reject) {
     fileRead(listURL, function(content) {
         if(!content || !content.length) {
-            resolve();
+            if(typeof resolve === "function") {
+                resolve();
+            }
             return false;
         }
         try {
@@ -78,7 +80,7 @@ Loader.prototype.readNext = function(resolve, reject) {
     
     switch(candidate.toLowerCase().replace(/.*\./, '')) {
         case "list":
-            this.addList(candidate, this.readNext(resolve, reject));
+            this.addList(candidate, this.readNext.bind(this, resolve, reject));
             return;
             break;
         case "js":
@@ -106,7 +108,9 @@ Loader.prototype.readNext = function(resolve, reject) {
                         window.config[i] = parsed[i];
                     }
                 } catch(error) {
-                    console.warn(error);
+                    log("config file could not be parsed", {
+                        'fileURL': listURL, 'fileContent': content },
+                        Log.Level.WARNING);
                     if(typeof reject === "function") {
                         reject();                
                         return;
@@ -119,6 +123,7 @@ Loader.prototype.readNext = function(resolve, reject) {
     }
     
     if(typeof parse === "function") {
+        console.log(candidate);
         fileRead(candidate, parse, reject);
     } else {
         this.readNext(resolve, reject);
