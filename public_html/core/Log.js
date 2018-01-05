@@ -1,7 +1,9 @@
+window.config = window.config || {};
+
 var Log = function(message, attributes, level) {
     this.message = message || "";
     this.attributes = attributes || {};
-    this.level = level || 0;
+    this.level = level || 6;
     this.timestamp = + new Date();
     
     switch(level) {
@@ -16,6 +18,11 @@ var Log = function(message, attributes, level) {
         case Log.Level.REPORT:
             console.log(this.getLevelAsString(), this.timestamp, "\"" + message + "\"", attributes);
             break;
+        default:
+            if(config.verboseLevel >= level) {
+                console.log(this.getLevelAsString(), this.timestamp, "\"" + message + "\"", attributes);
+            }
+            break;
     }
     
     dispatch("log", this);
@@ -29,7 +36,7 @@ Log.Level = {
     /* should be logged visibly in appropriate ui element */
     WARNING: 4,     // expected points of failure
     REPORT: 5,      // reports of normal behavior
-    UNDEFINED: 6,   // default log level
+    DEFAULT: 6,   // default log level
     /* can be safely ignored by ui */
     INTERESTING: 7, // expected, but notable behavior (e.g. singleton destruction)
     SUCCESS: 8,     // success reports (e.g. singleton constructors, request setups, listeners)
@@ -71,9 +78,7 @@ var log = function(message, attributes, level) {
         return false;
     }
     
-    level = level || Log.Level.UNDEFINED;
-    
-    Logs.push(new Log(message, attributes, level));
+    Logs.push(new Log(message, attributes, level || Log.Level.DEFAULT));
     
     if(Logs.length > Constant.LOG_SIZE) {
         Logs.shift().destroy();

@@ -100,7 +100,7 @@ Loader.prototype.readNext = function(resolve, reject) {
                 this.readNext(resolve, reject);
             }.bind(this);
             break;
-        case "conf":
+        case "json":
             parse = function(content) {
                 try {
                     var parsed = JSON.parse(content);
@@ -123,7 +123,6 @@ Loader.prototype.readNext = function(resolve, reject) {
     }
     
     if(typeof parse === "function") {
-        console.log(candidate);
         fileRead(candidate, parse, reject);
     } else {
         this.readNext(resolve, reject);
@@ -132,7 +131,9 @@ Loader.prototype.readNext = function(resolve, reject) {
 
 window.onload = function() {
     requestAnimationFrame(function() {
-        new Loader().load("core/main.list");
+        new Loader().load("core/main.list", function() {
+            window.Manager=new window.Manager();
+        });
     });
 };
     
