@@ -18,5 +18,17 @@
         <div id="initialLoader">
             <div id="testbutton" class="button">Loading...</div>
         </div>
+        <script>
+            var butt = document.getElementById("testbutton");
+            butt.no = 0;
+            setInterval(function() {
+                this.classList.remove("elevation-"+this.no);
+                this.no++;
+                if(this.no > 24) {
+                    this.no = 0;
+                }
+                this.classList.add("elevation-"+this.no);
+            }.bind(butt), 500);
+            </script>
     </body>
 </html>

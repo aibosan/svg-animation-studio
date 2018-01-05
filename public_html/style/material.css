@@ -111,17 +111,17 @@ body {
     box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14),
     0px 2px 1px -1px rgba(0, 0, 0, 0.12); }
-.elevation-2, .button.floating.disabled, .button.raised {
+.elevation-2, .button.floating.disabled, .button.raised, .window, .window.disabled:hover {
     z-index: 200;
     box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14),
     0px 3px 1px -2px rgba(0, 0, 0, 0.12); }
-.elevation-3 {
+.elevation-3, .window:hover {
     z-index: 300;
     box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.2),
     0px 3px 4px 0px rgba(0, 0, 0, 0.14),
     0px 3px 3px -2px rgba(0, 0, 0, 0.12); }
-.elevation-4, .active.elevation-0:hover, .button.floating, .button.raised:focus {
+.elevation-4, .active.elevation-0:hover, .button.floating, .button.raised:focus, .window.active {
     z-index: 400;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14),
@@ -141,27 +141,27 @@ body {
     box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
     0px 7px 10px 1px rgba(0, 0, 0, 0.14),
     0px 2px 16px 1px rgba(0, 0, 0, 0.12); }
-.elevation-8, .active.elevation-4:hover {
+.elevation-8, .active.elevation-4:hover, .menu-0 {
     z-index: 800;
     box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
     0px 8px 10px 1px rgba(0, 0, 0, 0.14),
     0px 3px 14px 2px rgba(0, 0, 0, 0.12); }
-.elevation-9, .active.elevation-5:hover {
+.elevation-9, .active.elevation-5:hover, .menu-1 {
     z-index: 900;
     box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2),
     0px 9px 12px 1px rgba(0, 0, 0, 0.14),
     0px 3px 16px 2px rgba(0, 0, 0, 0.12); }
-.elevation-10, .active.elevation-6:hover {
+.elevation-10, .active.elevation-6:hover, .menu-2 {
     z-index: 1000;
     box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2),
     0px 10px 14px 1px rgba(0, 0, 0, 0.14),
     0px 4px 18px 3px rgba(0, 0, 0, 0.12); }
-.elevation-11, .active.elevation-7:hover {
+.elevation-11, .active.elevation-7:hover, .menu-3 {
     z-index: 1100;
     box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2),
     0px 11px 15px 1px rgba(0, 0, 0, 0.14),
     0px 4px 20px 3px rgba(0, 0, 0, 0.12); }
-.elevation-12, .active.elevation-8:hover {
+.elevation-12, .active.elevation-8:hover, .popup {
     z-index: 1200;
     box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
     0px 12px 17px 2px rgba(0, 0, 0, 0.14),
@@ -221,7 +221,7 @@ body {
     box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2),
     0px 23px 36px 3px rgba(0, 0, 0, 0.14),
     0px 9px 44px 8px rgba(0, 0, 0, 0.12); }
-.elevation-24, .active.elevation-20:hover {
+.elevation-24, .active.elevation-20:hover, .dialog {
     z-index: 2400;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
     0px 24px 38px 3px rgba(0, 0, 0, 0.14),
