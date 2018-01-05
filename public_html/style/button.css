@@ -58,6 +58,7 @@ button.black:not([disabled]):before:active {
 }
 button.black[disabled] {
     color: #aaa;
+    border-color: #888;
 }
 button.black[disabled]:before {
     background-color: #888;
