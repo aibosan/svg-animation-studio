@@ -1,4 +1,7 @@
 [
     "config/ui.json",
-    "style/material.css"
+    "style/button.css",
+    "style/font.css",
+    "style/shadow.css",
+    "style/ui.css"
 ]

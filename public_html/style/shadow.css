@@ -1,117 +1,12 @@
-@font-face {
-	font-family: 'Open Sans';
-	font-weight: normal;
-	src: url('font/OpenSans-Regular.ttf');
-}
-
-@font-face {
-	font-family: 'Open Sans';
-	font-weight: bold;
-	src: url('font/OpenSans-Bold.ttf');
-}
-
-@font-face {
-	font-family: 'Open Sans';
-	font-style: italic;
-	font-weight: normal;
-	src: url('font/OpenSans-Italic.ttf');
-}
-
-@font-face {
-	font-family: 'Open Sans';
-	font-style: italic;
-	font-weight: bold;
-	src: url('font/OpenSans-BoldItalic.ttf');
-}
-
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url('font/MaterialIcons-Regular.ttf') format('truetype');
-}
-
-body {
-    font-family: "Open Sans";
-}
-
-*:not(.selectable) {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-}
-
-.animated {
-    transition: all 0.25s cubic-bezier(0.0, 0.0, 0.2, 1);
-}
-
-/** Buttons **/
-.button {
-    border: 1px solid #eee;
-    position: relative;
-    display: inline-block;
-    
-    min-width: 4em;
-    height: 2.5em;
-    padding: 0 1em;
-    margin: 1ex;
-    overflow: hidden;
-    outline: none;
-    transition: background-color 0.25s cubic-bezier(0.0, 0.0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.0, 0.0, 0.2, 1) ;
-    
-    text-align: center;
-    line-height: 2.5em;
-    vertical-align: middle;
-    
-    background-color: white;
-    color: black;
-    cursor: pointer;
-}
-.button:hover, .button:focus {
-    border-color: #ccc;
-}
-.button:active {
-    background-color: #ddd;
-    bottom: -1px;
-}
-.button.disabled {
-    color: #ccc;
-    background-color: white;
-    border-color: #eee;
-    cursor: default;
-}
-
-.button.black {
-    color: white;
-    background-color: #555;
-    border-color: #555;
-}
-.button.black.disabled {
-    color: #ccc;
-    background-color: #999 !important;
-}
-.button.black:hover, .button.black:focus {
-    background-color: #333;
-    border-color: black;
-}
-.button.black:active {
-    background-color: black;
-}
-
-/** Elevation **/
 .elevation-0 {
     z-index: 0;
     box-shadow:  0px 0px 0px 0px rgba(0, 0, 0, 0.2) }
-.elevation-1, .button.raised.disabled {
+.elevation-1, button.raised.disabled {
     z-index: 100;
     box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14),
     0px 2px 1px -1px rgba(0, 0, 0, 0.12); }
-.elevation-2, .button.floating.disabled, .button.raised, .window, .window.disabled:hover {
+.elevation-2, button.floating.disabled, button.raised, .window, .window.disabled:hover {
     z-index: 200;
     box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14),
@@ -121,22 +16,22 @@ body {
     box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.2),
     0px 3px 4px 0px rgba(0, 0, 0, 0.14),
     0px 3px 3px -2px rgba(0, 0, 0, 0.12); }
-.elevation-4, .active.elevation-0:hover, .button.floating, .button.raised:focus, .window.active {
+.elevation-4, button.floating, button.raised:focus, .active.elevation-0:hover, .window.active {
     z-index: 400;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14),
     0px 1px 10px 0px rgba(0, 0, 0, 0.12); }
-.elevation-5, .active.elevation-1:hover, .button.raised:hover {
+.elevation-5, .active.elevation-1:hover, button.raised:hover {
     z-index: 500;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 5px 8px 0px rgba(0, 0, 0, 0.14),
     0px 1px 14px 0px rgba(0, 0, 0, 0.12); }
-.elevation-6, .active.elevation-2:hover, .button.floating:focus {
+.elevation-6, .active.elevation-2:hover, button.floating:focus {
     z-index: 600;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 6px 10px 0px rgba(0, 0, 0, 0.14),
     0px 1px 18px 0px rgba(0, 0, 0, 0.12); }
-.elevation-7, .active.elevation-3:hover, .button.floating:hover {
+.elevation-7, .active.elevation-3:hover, button.floating:hover {
     z-index: 700;
     box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
     0px 7px 10px 1px rgba(0, 0, 0, 0.14),
