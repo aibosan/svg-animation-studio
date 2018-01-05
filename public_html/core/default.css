@@ -1,3 +1,29 @@
 body {
-    
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+#initialLoader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#initialLoader div {
+    position: relative;
+    border: 1px solid black;
+    background: white;
+    padding: 1em;
+    width: 16em;
+    height: 5em;
+    line-height: 5em;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: box-shadow 0.25s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
