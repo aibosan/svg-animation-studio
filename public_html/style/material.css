@@ -1,0 +1,228 @@
+@font-face {
+	font-family: 'Open Sans';
+	font-weight: normal;
+	src: url('font/OpenSans-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-weight: bold;
+	src: url('font/OpenSans-Bold.ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: italic;
+	font-weight: normal;
+	src: url('font/OpenSans-Italic.ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: italic;
+	font-weight: bold;
+	src: url('font/OpenSans-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('font/MaterialIcons-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: "Open Sans";
+}
+
+*:not(.selectable) {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.animated {
+    transition: all 0.25s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+/** Buttons **/
+.button {
+    border: 1px solid #eee;
+    position: relative;
+    display: inline-block;
+    
+    min-width: 4em;
+    height: 2.5em;
+    padding: 0 1em;
+    margin: 1ex;
+    overflow: hidden;
+    outline: none;
+    transition: background-color 0.25s cubic-bezier(0.0, 0.0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.0, 0.0, 0.2, 1) ;
+    
+    text-align: center;
+    line-height: 2.5em;
+    vertical-align: middle;
+    
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+.button:hover, .button:focus {
+    border-color: #ccc;
+}
+.button:active {
+    background-color: #ddd;
+    bottom: -1px;
+}
+.button.disabled {
+    color: #ccc;
+    background-color: white;
+    border-color: #eee;
+    cursor: default;
+}
+
+.button.black {
+    color: white;
+    background-color: #555;
+    border-color: #555;
+}
+.button.black.disabled {
+    color: #ccc;
+    background-color: #999 !important;
+}
+.button.black:hover, .button.black:focus {
+    background-color: #333;
+    border-color: black;
+}
+.button.black:active {
+    background-color: black;
+}
+
+/** Elevation **/
+.elevation-0 {
+    z-index: 0;
+    box-shadow:  0px 0px 0px 0px rgba(0, 0, 0, 0.2) }
+.elevation-1, .button.raised.disabled {
+    z-index: 100;
+    box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.12); }
+.elevation-2, .button.floating.disabled, .button.raised {
+    z-index: 200;
+    box-shadow:  0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 1px -2px rgba(0, 0, 0, 0.12); }
+.elevation-3 {
+    z-index: 300;
+    box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.2),
+    0px 3px 4px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 3px -2px rgba(0, 0, 0, 0.12); }
+.elevation-4, .active.elevation-0:hover, .button.floating, .button.raised:focus {
+    z-index: 400;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12); }
+.elevation-5, .active.elevation-1:hover, .button.raised:hover {
+    z-index: 500;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 14px 0px rgba(0, 0, 0, 0.12); }
+.elevation-6, .active.elevation-2:hover, .button.floating:focus {
+    z-index: 600;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 18px 0px rgba(0, 0, 0, 0.12); }
+.elevation-7, .active.elevation-3:hover, .button.floating:hover {
+    z-index: 700;
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
+    0px 7px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 16px 1px rgba(0, 0, 0, 0.12); }
+.elevation-8, .active.elevation-4:hover {
+    z-index: 800;
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 3px 14px 2px rgba(0, 0, 0, 0.12); }
+.elevation-9, .active.elevation-5:hover {
+    z-index: 900;
+    box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2),
+    0px 9px 12px 1px rgba(0, 0, 0, 0.14),
+    0px 3px 16px 2px rgba(0, 0, 0, 0.12); }
+.elevation-10, .active.elevation-6:hover {
+    z-index: 1000;
+    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2),
+    0px 10px 14px 1px rgba(0, 0, 0, 0.14),
+    0px 4px 18px 3px rgba(0, 0, 0, 0.12); }
+.elevation-11, .active.elevation-7:hover {
+    z-index: 1100;
+    box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2),
+    0px 11px 15px 1px rgba(0, 0, 0, 0.14),
+    0px 4px 20px 3px rgba(0, 0, 0, 0.12); }
+.elevation-12, .active.elevation-8:hover {
+    z-index: 1200;
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
+    0px 12px 17px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 22px 4px rgba(0, 0, 0, 0.12); }
+.elevation-13, .active.elevation-9:hover {
+    z-index: 1300;
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
+    0px 13px 19px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 24px 4px rgba(0, 0, 0, 0.12); }
+.elevation-14, .active.elevation-10:hover {
+    z-index: 1400;
+    box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2),
+    0px 14px 21px 2px rgba(0, 0, 0, 0.14),
+    0px 5px 26px 4px rgba(0, 0, 0, 0.12); }
+.elevation-15, .active.elevation-11:hover {
+    z-index: 1500;
+    box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2),
+    0px 15px 22px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 28px 5px rgba(0, 0, 0, 0.12); }
+.elevation-16, .active.elevation-12:hover {
+    z-index: 1600;
+    box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
+    0px 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 30px 5px rgba(0, 0, 0, 0.12); }
+.elevation-17, .active.elevation-13:hover {
+    z-index: 1700;
+    box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2),
+    0px 17px 26px 2px rgba(0, 0, 0, 0.14),
+    0px 6px 32px 5px rgba(0, 0, 0, 0.12); }
+.elevation-18, .active.elevation-14:hover {
+    z-index: 1800;
+    box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2),
+    0px 18px 28px 2px rgba(0, 0, 0, 0.14),
+    0px 7px 34px 6px rgba(0, 0, 0, 0.12); }
+.elevation-19, .active.elevation-15:hover {
+    z-index: 1900;
+    box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2),
+    0px 19px 29px 2px rgba(0, 0, 0, 0.14),
+    0px 7px 36px 6px rgba(0, 0, 0, 0.12); }
+.elevation-20, .active.elevation-16:hover {
+    z-index: 2000;
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2),
+    0px 20px 31px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 38px 7px rgba(0, 0, 0, 0.12); }
+.elevation-21, .active.elevation-17:hover {
+    z-index: 2100;
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2),
+    0px 21px 33px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 40px 7px rgba(0, 0, 0, 0.12); }
+.elevation-22, .active.elevation-18:hover {
+    z-index: 2200;
+    box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2),
+    0px 22px 35px 3px rgba(0, 0, 0, 0.14),
+    0px 8px 42px 7px rgba(0, 0, 0, 0.12); }
+.elevation-23, .active.elevation-19:hover {
+    z-index: 2300;
+    box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2),
+    0px 23px 36px 3px rgba(0, 0, 0, 0.14),
+    0px 9px 44px 8px rgba(0, 0, 0, 0.12); }
+.elevation-24, .active.elevation-20:hover {
+    z-index: 2400;
+    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0px 9px 46px 8px rgba(0, 0, 0, 0.12); }
