@@ -36,11 +36,12 @@ Log.Level = {
     /* should be logged visibly in appropriate ui element */
     WARNING: 4,     // expected points of failure
     REPORT: 5,      // reports of normal behavior
-    DEFAULT: 6,   // default log level
+    DEFAULT: 6,     // default log level
     /* can be safely ignored by ui */
     INTERESTING: 7, // expected, but notable behavior (e.g. singleton destruction)
     SUCCESS: 8,     // success reports (e.g. singleton constructors, request setups, listeners)
-    LOW: 9          // information (e.g. telemetry)
+    LOW: 9,         // information (e.g. telemetry)
+    EVENT: 10       // most information exchanges
 };
 
 Log.prototype.destroy = function() {

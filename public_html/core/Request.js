@@ -97,12 +97,25 @@ function dispatch(eventName, attributes) {
         return false;
     }
     if(!EventCallbacks[eventName]) {
+        if(eventName !== "log") {
+            log(eventName, {
+                'attributes': attributes,
+                'listeners': 0,
+                'unregistered': true
+            }, Log.Level.EVENT);
+        }
         return true;
     }
     for(var i = 0; i < EventCallbacks[eventName].length; i++) {
         if(!EventCallbacks[eventName][i](attributes)) {
             break;
         }
+    }
+    if(eventName !== "log") {
+        log(eventName, {
+            'attributes': attributes,
+            'listeners': EventCallbacks[eventName].length
+        }, Log.Level.EVENT);
     }
     return true;
 };
