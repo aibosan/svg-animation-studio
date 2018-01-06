@@ -5,7 +5,7 @@
  * @returns {HTMLButtonElement}
  */
 function Toggle(options, attributes) {
-    options = options || { "states": [] };
+    options = options || { };
     UserInterfaceElement.call(this, "button", options, attributes);
     this.element.classList.add("toggle");
     
@@ -13,6 +13,10 @@ function Toggle(options, attributes) {
         options = {
             "states": options
         };
+    }
+    options.states = options.states || [];
+    if(options.states.length === 0) {
+        return null;
     }
     
     this.state = null;
@@ -30,13 +34,12 @@ function Toggle(options, attributes) {
                     element.setAttribute("class", "white hidden");
             }
         } else if(typeof options.states[i] === "object") {
-            element.appendChild(document.createTextNode(options.states[i].text));
+            if(options.states[i].text) 
+                element.appendChild(document.createTextNode(options.states[i].text));
             if(options.states[i].class)
                 element.classList.add(options.states[i].class);
-            if(options.states[i].selected) {
-                element.classList.remove("hidden");
+            if(options.states[i].selected)
                 this.state = i;
-            }
             if(options.states[i].onClick)
                 element.addEventListener('click', options.states[i].onClick);
         } else if(options.states[i] instanceof HTMLElement) {
@@ -49,8 +52,10 @@ function Toggle(options, attributes) {
     
     if(this.state === null) {
         this.state = 0;
-        this.element.children[0].classList.remove("hidden");
     }
+    this.element.children[this.state].classList.remove("hidden");
+    for(var i = 0; i < this.element.children[this.state].classList.length; i++)
+        this.element.classList.add(this.element.children[this.state].classList[i]);
     
     return this.infest();
 };

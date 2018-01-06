@@ -1,4 +1,5 @@
 [
     "config/core.json",
+    "style/color.css",
     "class/core/Manager.js"
 ]

@@ -1,5 +1,4 @@
 button {
-    border: 1px solid transparent;
     position: relative;
     display: inline-block;
     min-width: 4em;
@@ -13,36 +12,30 @@ button {
         background-color 0.25s cubic-bezier(0.0, 0.0, 0.2, 1),
         box-shadow 0.15s cubic-bezier(0.0, 0.0, 0.2, 1);
     text-align: center;
-    line-height: 2.25em;
+    line-height: 2.5em;
     vertical-align: middle;
     cursor: pointer;
+    font-weight: bold;
+    border: none;
+    z-index: 0;
 }
 
 button[disabled] {
     cursor: default !important;
-    color: #aaa !important;
-    border-color: #ddd !important;
-}
-button[disabled]:before {
-    background-color: #ddd !important;
+    opacity: 0.30;
 }
 
-/* Default */
-button {
-    border-color: #aaa;
-    color: black;
-}
 button:not([disabled]):before {
-    background: white;
-}
-button:not([disabled]):hover {
-    border-color: #333;
+    background: #999999;
+    opacity: 0.0;
 }
 button:not([disabled]):hover:before {
-    border-color: white;
+    background: #999999;
+    opacity: 0.2;
 }
 button:not([disabled]):active:before {
-    background-color: #ddd;
+    background: #999999;
+    opacity: 0.4;
 }
 
 button:before {
@@ -61,12 +54,12 @@ button:after {
     left: 51%;
     right: 51%;
     bottom: -1em;
-    opacity: 0.5;
     border: none;
     content: " ";
     background-color: white;
+    opacity: 0.5;
     border-radius: 5em;
-    transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out 0.5s;
     z-index: -1;
 }
 
@@ -77,30 +70,39 @@ button:after {
 }
 
 button:active:after {
-    animation: button-active 2s ease-in-out 0.25s infinite;
+    animation: button-active 2s ease-in-out 0.75s infinite;
     left: 5%;
     right: 5%;
 }
+
+/* Flat */
+button {
+    color: var(--text);
+    background-color: var(--bg);
+}
+
+/* Dark */
+button.dark {
+    color: var(--fg);
+    background-color: var(--bg);
+}
+
+button.dark.raised, button.dark.floating {
+    color: var(--bg);
+    background-color: var(--fg);
+}
+
 
 /* Toggle */
 button.toggle .hidden {
     display: none;
 }
 
-/* Black */
-button.black {
-    border-color: #555;
-    color: white;
+/* Switch */
+button.switch {
+    
 }
-button.black:not([disabled]):before {
-    background: #555;
-}
-button.black:not([disabled]):hover {
-    border-color: black;
-}
-button.black:not([disabled]):hover:before {
-    background: #333;
-}
-button.black:not([disabled]):active:before {
-    background-color: black;
+
+button.switch:after, button.switch:before {
+    content: " ";
 }
