@@ -3,6 +3,7 @@
     "class/ui/UserInterfaceElement.js",
     "class/ui/Button.js",
     "class/ui/Toggle.js",
+    "class/ui/Switch.js",
     "style/button.css",
     "style/font.css",
     "style/shadow.css",

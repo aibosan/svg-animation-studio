@@ -29,9 +29,9 @@ function Toggle(options, attributes) {
             element.appendChild(document.createTextNode(options.states[i]));
             if(options.default) {
                 if(i === 0)
-                    element.setAttribute("class", "black hidden");
+                    element.setAttribute("class", "dark hidden");
                 if(i === 1)
-                    element.setAttribute("class", "white hidden");
+                    element.setAttribute("class", "hidden");
             }
         } else if(typeof options.states[i] === "object") {
             if(options.states[i].text) 

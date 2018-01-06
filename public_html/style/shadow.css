@@ -1,7 +1,7 @@
 .elevation-0, button.raised.disabled, button.raised[disabled], button.floating.disabled, button.floating[disabled] {
     z-index: 0;
     box-shadow:  0px 0px 0px 0px rgba(0, 0, 0, 0.2) }
-.elevation-1, input.switch:after  {
+.elevation-1  {
     z-index: 100;
     box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14),
@@ -29,7 +29,7 @@ button.raised:not([disabled]):hover {
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 5px 8px 0px rgba(0, 0, 0, 0.14),
     0px 1px 14px 0px rgba(0, 0, 0, 0.12); }
-.elevation-6, .active.elevation-2:hover {
+.elevation-6, .switch:after, .active.elevation-2:hover {
     z-index: 600;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 6px 10px 0px rgba(0, 0, 0, 0.14),

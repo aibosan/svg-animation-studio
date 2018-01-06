@@ -107,27 +107,53 @@ button.toggle .hidden {
 }
 
 /* Switch */
-input.switch {
+.switch {
+    cursor: pointer;
+    pointer-events: all;
     display: inline-block;
     position: relative;
-    
-}
-
-input.switch:before {
-    content: " ";
-    position: absolute;
-    width: 4em;
-    height: 2em;
-    background-color: var(--fg);
-    border-radius: 1em;
-}
-
-input.switch:after {
-    content: " ";
-    position: absolute;
+    margin: 0 1ex;
     width: 3em;
-    height: 3em;
+    height: 1.5em;
+    top: 0.25em;
+}
+
+.switch:before {
+    content: " ";
+    position: absolute;
+    width: 2.5em;
+    height: 1em;
+    top: 0.25em;
+    left: 0.25em;
+    border-radius: 0.5em;
     background-color: var(--fg);
-    border-radius: 1.5em;
+    opacity: 0.35;
+}
+
+.switch:after {
+    content: " ";
+    position: absolute;
+    width: 1.5em;
+    height: 1.5em;
+    top: 0;
+    border-radius: 50%;
+    transition: all 0.25s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.switch:not(.on):after {
+    left: 1.5em;
+    background-color: var(--bg);
+}
+
+.switch.on:after {
+    left: 0;
+    background-color: var(--fg);
+}
+.switch:not(.on):before {
+    background-color: var(--text);
+}
+
+.switch.on:before {
+    background-color: var(--fg);
 }
 
