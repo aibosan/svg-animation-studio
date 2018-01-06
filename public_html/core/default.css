@@ -1,3 +1,29 @@
+@font-face {
+	font-family: 'Open Sans';
+	font-weight: normal;
+	src: url('../font/OpenSans/OpenSans-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-weight: bold;
+	src: url('../font/OpenSans/OpenSans-Bold.ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: italic;
+	font-weight: normal;
+	src: url('../font/OpenSans/OpenSans-Italic.ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: italic;
+	font-weight: bold;
+	src: url('../font/OpenSans/OpenSans-BoldItalic.ttf');
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -5,6 +31,7 @@ body {
     width: 100%;
     height: 100%;
     cursor: default;
+    font-family: "Open Sans";
 }
 
 #initialLoader {
@@ -12,8 +39,113 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
+    font-size: 16px;
+    line-height: 16px;
+    vertical-align: top;
 }
-#initialLoader button {
+
+#initialLoader > * {
+    position: relative;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.loading {
+    font-size: 75%;
+    color: lightgray;
+}
+
+.loading span:nth-child(1) {
+    animation: opacity-pulse 6s ease-in-out infinite;
+}
+.loading span:nth-child(2) {
+    animation: opacity-pulse 6s ease-in-out infinite 2s;
+}
+.loading span:nth-child(3) {
+    animation: opacity-pulse 6s ease-in-out infinite 4s;
+}
+
+@keyframes opacity-pulse {
+    0% { opacity: 1; }
+    25% { opacity: 1; }
+    50% { opacity: 0; }
+    75% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+.logo {
+    font-family: "Open Sans";
+    color: black;
+    font-size: 47px;
+    line-height: 47px;
+    vertical-align: middle;
+}
+
+.logo span {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+}
+
+/* arc */
+.logo span:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 3px solid black;
+    border-right-color: transparent;
+    border-radius: 50%;
+    transform: rotate(-24deg);
+}
+
+.logo.animated span:before {
+    animation: 4s g-arc ease-in-out infinite;
+}
+
+/* line */
+.logo span:after {
+    z-index: 1;
+    content: " ";
+    position: absolute;
+    top: 20px;
+    left: 16px;
+    right: 1px;
+    bottom: 11px;
+    border-radius: 0%;
+    background-color: black;
+}
+
+.logo.animated span:after {
+    animation: 4s g-line ease-out infinite;
+}
+
+@keyframes g-arc {
+    0% { transform: rotate(-24deg); }
+    40% { transform: rotate(-24deg); }
+    85% { transform: rotate(1056deg); }
+    100% { transform: rotate(1056deg); }
+}
+
+@keyframes g-line {
+    25% { opacity: 1; top: 20px; }
+    30% { opacity: 0; top: 23px; }
+    90% { opacity: 0; top: 23px; }
+    95% { opacity: 1; top: 20px; }
+}
+
+/* A */
+.A {
+    width: 16px;
+    height: 3px;
+    border: 16px solid white;
+    background: black;
+}
+
+.A:before {
+    
 }

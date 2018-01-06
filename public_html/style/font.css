@@ -1,30 +1,4 @@
 @font-face {
-	font-family: 'Open Sans';
-	font-weight: normal;
-	src: url('font/OpenSans/OpenSans-Regular.ttf');
-}
-
-@font-face {
-	font-family: 'Open Sans';
-	font-weight: bold;
-	src: url('font/OpenSans/OpenSans-Bold.ttf');
-}
-
-@font-face {
-	font-family: 'Open Sans';
-	font-style: italic;
-	font-weight: normal;
-	src: url('font/OpenSans/OpenSans-Italic.ttf');
-}
-
-@font-face {
-	font-family: 'Open Sans';
-	font-style: italic;
-	font-weight: bold;
-	src: url('font/OpenSans/OpenSans-BoldItalic.ttf');
-}
-
-@font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;

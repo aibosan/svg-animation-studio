@@ -5,14 +5,14 @@
  * @argument {Object|null} attributes container's attributes
  */
 function UserInterfaceElement(tagName, options, attributes) {
-    if(!tagName) {
+    if(!tagName && !options.element) {
         return this;
     }
     attributes = attributes || {};
     options = options || {};
     options.event = options.event || {};
     this.eventListeners = options.event;
-    this.element = document.createElement(tagName);
+    this.element = options.element ? options.element : document.createElement(tagName);
     for(var i in attributes) {
         this.element.setAttribute(i, attributes[i]);
     }

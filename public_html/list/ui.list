@@ -1,6 +1,5 @@
 [
     "config/ui.json",
-    "class/ui/ElementParasite.js",
     "class/ui/UserInterfaceElement.js",
     "class/ui/Button.js",
     "style/button.css",

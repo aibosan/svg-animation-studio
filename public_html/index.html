@@ -16,16 +16,18 @@
     </head>
     <body>
         <div id="initialLoader">
-            <button class="black">Black</button>
-            <button class="">White</button>
-            <button class="black" disabled="disabled">Black disabled</button>
-            <button class="" disabled="disabled">White disabled</button>
-            <button class="black raised">Black raised</button>
-            <button class="raised">White raised</button>
-            <button class="black floating">Black floating</button>
-            <button class="floating">White floating</button><br>
-            <button class="black toggle">Black</button>
-            <button class="toggle">White</button>
+            <div>
+                <div id="logo" class="logo">SV<span></span>AS</div>
+                <div style="display:none" id="loading" class="loading animated">loading...</div>
+                <script>
+                    document.getElementById("loading").style.display=null;
+                    document.getElementById("logo").classList.add("animated");
+                </script>
+                <noscript>
+                    <p>JavaScript is required for this page to function correctly.</p>
+                </noscript>
+            </div>
         </div>
+        <script type="text/javascript" src="core/Gate.js"></script>
     </body>
 </html>
