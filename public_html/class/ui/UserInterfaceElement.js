@@ -95,7 +95,7 @@ UserInterfaceElement.prototype.show = function() {
  * Toggles visibility of UI element
  * @returns {UserInterfaceElement}
  */
-UserInterfaceElement.prototype.toggle = function() {
+UserInterfaceElement.prototype.toggleHidden = function() {
     if(this.classList.contain("hidden")) {
         this.show();
     } else {
