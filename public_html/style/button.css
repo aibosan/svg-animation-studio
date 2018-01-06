@@ -20,21 +20,27 @@ button {
     z-index: 0;
 }
 
-button[disabled] {
+button[disabled], button.disabled {
     cursor: default !important;
     opacity: 0.30;
+    color: var(--text);
+    background-color: var(--bg);
 }
-
-button:not([disabled]):before {
-    background: #999999;
+button.raised[disabled]:before, button.raised.disabled:before,
+button.floating[disabled]:before, button.floating.disabled:before {
+    opacity: 0.5;
+}
+button:before {
     opacity: 0.0;
 }
-button:not([disabled]):hover:before {
-    background: #999999;
+
+button.raised:before, button.floating:before {
+    opacity: 0.1;
+}
+button:not([disabled]):not(.disabled):active:before {
     opacity: 0.2;
 }
-button:not([disabled]):active:before {
-    background: #999999;
+button:not([disabled]):not(.disabled):active:before {
     opacity: 0.4;
 }
 
@@ -46,6 +52,7 @@ button:before {
     bottom: 0;
     z-index: -2;
     content: " ";
+    background: #999;
 }
 
 button:after {
@@ -82,12 +89,13 @@ button {
 }
 
 /* Dark */
-button.dark {
+button.dark:not([disabled]):not(.disabled) {
     color: var(--fg);
     background-color: var(--bg);
 }
 
-button.dark.raised, button.dark.floating {
+button.dark.raised:not([disabled]):not(.disabled),
+button.dark.floating:not([disabled]):not(.disabled) {
     color: var(--bg);
     background-color: var(--fg);
 }
@@ -99,10 +107,27 @@ button.toggle .hidden {
 }
 
 /* Switch */
-button.switch {
+input.switch {
+    display: inline-block;
+    position: relative;
     
 }
 
-button.switch:after, button.switch:before {
+input.switch:before {
     content: " ";
+    position: absolute;
+    width: 4em;
+    height: 2em;
+    background-color: var(--fg);
+    border-radius: 1em;
 }
+
+input.switch:after {
+    content: " ";
+    position: absolute;
+    width: 3em;
+    height: 3em;
+    background-color: var(--fg);
+    border-radius: 1.5em;
+}
+

@@ -1,7 +1,7 @@
-.elevation-0 {
+.elevation-0, button.raised.disabled, button.raised[disabled], button.floating.disabled, button.floating[disabled] {
     z-index: 0;
     box-shadow:  0px 0px 0px 0px rgba(0, 0, 0, 0.2) }
-.elevation-1 {
+.elevation-1, input.switch:after  {
     z-index: 100;
     box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14),

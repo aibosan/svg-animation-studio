@@ -11,8 +11,8 @@ function Button(options, attributes) {
     this.element.appendChild(options instanceof HTMLElement ? options : document.createTextNode(typeof options === "string" ? options : (options.text || options.value)));
     
     this.element.addEventListener('click', function() {
-        dispatch("clicked", this)
-    }.bind(this), false);
+        dispatch("clicked", this);
+    }.bind(this.element), false);
     
     return this.infest();
 };
