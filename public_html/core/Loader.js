@@ -70,7 +70,7 @@ Loader.prototype.readNext = function(resolve, reject) {
         return;
     }
     
-    var candidate = this.queue.pop();
+    var candidate = this.queue.shift();
     if(!candidate || typeof candidate !== 'string' || !candidate.length) {
         this.readNext(resolve, reject);
         return;

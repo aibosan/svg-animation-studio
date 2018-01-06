@@ -10,7 +10,7 @@ function fileRead(fileName, resolve, reject) {
     xhr.onreadystatechange = function () {
         if(xhr.readyState === XMLHttpRequest.DONE) {
             if(xhr.status === 200)  {
-                log("file read error", fileName, Log.Level.SUCCESS);
+                log("file read", fileName, Log.Level.SUCCESS);
                 if(typeof resolve === "function") {
                     resolve(xhr.responseText);
                 }
