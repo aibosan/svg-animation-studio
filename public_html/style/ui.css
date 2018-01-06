@@ -21,3 +21,17 @@ body {
 .animated {
     transition: all 0.25s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
+
+.ui {
+    transition:
+        opacity 0.25s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.ui.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ui.disabled {
+    pointer-events: none;
+}

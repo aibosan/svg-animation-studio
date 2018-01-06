@@ -20,8 +20,14 @@ button {
 
 button[disabled] {
     cursor: default !important;
+    color: #aaa !important;
+    border-color: #ddd !important;
+}
+button[disabled]:before {
+    background-color: #ddd !important;
 }
 
+/* Default */
 button {
     border-color: #aaa;
     color: black;
@@ -32,36 +38,11 @@ button:not([disabled]):before {
 button:not([disabled]):hover {
     border-color: #333;
 }
+button:not([disabled]):hover:before {
+    border-color: white;
+}
 button:not([disabled]):active:before {
     background-color: #ddd;
-}
-button[disabled] {
-    color: #aaa;
-    border-color: #ddd;
-}
-
-button.black {
-    color: white;
-    border-color: #555;
-}
-button.black:before {
-    background-color: #555;
-}
-button.black:not([disabled]):hover:before {
-    background-color: #333;
-}
-button.black:not([disabled]):hover {
-    border-color: #333;
-}
-button.black:not([disabled]):before:active {
-    background-color: black;
-}
-button.black[disabled] {
-    color: #aaa;
-    border-color: #888;
-}
-button.black[disabled]:before {
-    background-color: #888;
 }
 
 button:before {
@@ -99,4 +80,27 @@ button:active:after {
     animation: button-active 2s ease-in-out 0.25s infinite;
     left: 5%;
     right: 5%;
+}
+
+/* Toggle */
+
+
+
+
+/* Black */
+button.black {
+    border-color: #555;
+    color: white;
+}
+button.black:not([disabled]):before {
+    background: #555;
+}
+button.black:not([disabled]):hover {
+    border-color: black;
+}
+button.black:not([disabled]):hover:before {
+    background: #333;
+}
+button.black:not([disabled]):active:before {
+    background-color: black;
 }
