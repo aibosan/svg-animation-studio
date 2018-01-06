@@ -75,6 +75,7 @@ UserInterfaceElement.prototype.destroy = function() {
  */
 UserInterfaceElement.prototype.hide = function() {
     this.classList.add("hidden");
+    dispatch("hidden", this);
     return this;
 };
 
@@ -84,6 +85,7 @@ UserInterfaceElement.prototype.hide = function() {
  */
 UserInterfaceElement.prototype.show = function() {
     this.classList.remove("hidden");
+    dispatch("shown", this);
     return this;
 };
 
@@ -107,6 +109,7 @@ UserInterfaceElement.prototype.toggle = function() {
 UserInterfaceElement.prototype.disable = function() {
     this.classList.add("disabled");
     this.setAttribute("disabled", "disabled");
+    dispatch("disabled", this);
     return this;
 };
 
@@ -117,5 +120,6 @@ UserInterfaceElement.prototype.disable = function() {
 UserInterfaceElement.prototype.enable = function() {
     this.classList.remove("disabled");
     this.removeAttribute("disabled");
+    dispatch("enabled", this);
     return this;
 };
