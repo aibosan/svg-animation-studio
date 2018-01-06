@@ -17,6 +17,7 @@ button {
     cursor: pointer;
     font-weight: bold;
     border: none;
+    bottom: 1px;
     z-index: 0;
 }
 
@@ -115,7 +116,7 @@ button.toggle .hidden {
     margin: 0 1ex;
     width: 3em;
     height: 1.5em;
-    top: 0.25em;
+    top: 0.35em;
 }
 
 .switch:before {
@@ -144,7 +145,6 @@ button.toggle .hidden {
     left: 1.5em;
     background-color: var(--bg);
 }
-
 .switch.on:after {
     left: 0;
     background-color: var(--fg);
@@ -152,8 +152,91 @@ button.toggle .hidden {
 .switch:not(.on):before {
     background-color: var(--text);
 }
-
 .switch.on:before {
     background-color: var(--fg);
 }
 
+.switch.on:not(.dark):after, .switch.on:not(.dark):before {
+    background-color: var(--text);
+}
+
+.switch[disabled], .switch.disabled {
+    cursor: default !important;
+    opacity: 0.30;
+    color: var(--text);
+    background-color: var(--bg);
+}
+
+.switch[disabled]:before, .switch.disabled:before {
+    background-color: var(--text);
+}
+
+.switch[disabled]:after, .switch.disabled:after {
+    background-color: var(--text);
+}
+
+/* Checkbox */
+.checkbox {
+    display: inline-block;
+    cursor: pointer;
+    pointer-events: all;
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    bottom: 0.2em;
+    margin: 0 0.25ex;
+    font-family: "Material Icons";
+    vertical-align: middle;
+}
+
+.checkbox:before {
+    color: var(--text);
+}
+
+.checkbox.dark:not([disabled]):not(.disabled):after {
+    color: var(--fg);
+}
+
+.checkbox:not(.dark):after {
+    color: var(--text);
+}
+
+.checkbox:before {
+    color: var(--text);
+}
+
+.checkbox:after, .checkbox:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 150%;
+    vertical-align: middle;
+    line-height: 1em;
+}
+
+.checkbox:after {
+    content: "check_box";
+}
+
+.checkbox:before {
+    content: "check_box_outline_blank";
+}
+
+.checkbox:not(.checked):not([checked]):after,
+.checkbox.checked:before, .checkbox[checked]:before {
+    opacity: 0;
+}
+
+.checkbox:not(.checked):not([checked]):before,
+.checkbox.checked:after, .checkbox[checked]:after {
+    opacity: 1;
+}
+
+.checkbox[disabled], .checkbox.disabled {
+    cursor: default !important;
+    opacity: 0.30;
+    color: var(--text);
+    background-color: var(--bg);
+}

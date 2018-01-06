@@ -4,6 +4,7 @@
     "class/ui/Button.js",
     "class/ui/Toggle.js",
     "class/ui/Switch.js",
+    "class/ui/Checkbox.js",
     "style/button.css",
     "style/font.css",
     "style/shadow.css",
