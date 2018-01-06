@@ -240,3 +240,12 @@ button.toggle .hidden {
     color: var(--text);
     background-color: var(--bg);
 }
+
+/* Radio button */
+.radio:after {
+    content: "radio_button_checked" !important;
+}
+
+.radio:before {
+    content: "radio_button_unchecked" !important;
+}
