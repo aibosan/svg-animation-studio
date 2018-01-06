@@ -39,6 +39,8 @@ function Toggle(options, attributes) {
             }
             if(options.states[i].onClick)
                 element.addEventListener('click', options.states[i].onClick);
+        } else if(options.states[i] instanceof HTMLElement) {
+            element.appendChild(options.states[i]);
         }
         this.element.appendChild(element);
     }
