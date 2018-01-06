@@ -74,8 +74,10 @@ UserInterfaceElement.prototype.destroy = function() {
  * @returns {UserInterfaceElement}
  */
 UserInterfaceElement.prototype.hide = function() {
+    this.addEventListener("transitionend", function() {
+        dispatch("hidden", this);
+    }.bind(this), { 'once': true });
     this.classList.add("hidden");
-    dispatch("hidden", this);
     return this;
 };
 
