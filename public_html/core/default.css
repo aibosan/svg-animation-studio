@@ -129,15 +129,3 @@ body {
     90% { opacity: 0; top: 23px; }
     95% { opacity: 1; top: 20px; }
 }
-
-/* A */
-.A {
-    width: 16px;
-    height: 3px;
-    border: 16px solid white;
-    background: black;
-}
-
-.A:before {
-    
-}

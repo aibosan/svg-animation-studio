@@ -83,9 +83,9 @@ button:active:after {
 }
 
 /* Toggle */
-
-
-
+button.toggle .hidden {
+    display: none;
+}
 
 /* Black */
 button.black {
