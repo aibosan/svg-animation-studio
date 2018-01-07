@@ -9,7 +9,7 @@ body {
     background-color: var(--bg);
 }
 
-*:not(.selectable) {
+*:not(.selectable), .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */

@@ -6,6 +6,7 @@
     "class/ui/Switch.js",
     "class/ui/Checkbox.js",
     "class/ui/Radio.js",
+    "class/ui/Slider.js",
     "style/button.css",
     "style/font.css",
     "style/shadow.css",

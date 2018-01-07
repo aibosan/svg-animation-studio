@@ -1,6 +1,10 @@
+.ui {
+    display: inline-block;
+    border-radius: 2px;
+}
+
 button {
     position: relative;
-    display: inline-block;
     min-width: 4em;
     height: 2.5em;
     padding: 0 1em;
@@ -248,4 +252,103 @@ button.toggle .hidden {
 
 .radio:before {
     content: "radio_button_unchecked" !important;
+}
+
+.radio.dark:before {
+    color: var(--fg) !important;
+}
+
+/* Slider */
+.slider {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    pointer-events: all;
+    vertical-align: middle;
+    position: relative;
+    height: 2em;
+    line-height: 2em;
+}
+
+.slider > * {
+    display: block;
+}
+
+.slider > div {
+    cursor: pointer;
+    pointer-events: all;
+    position: relative;
+    min-width: 16em;
+    height: 2px;
+    border: 1em solid transparent;
+    margin: 0;
+    background: #999;
+    background-clip:content-box
+}
+
+.slider > div > div {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: var(--fg);
+}
+
+.slider.vertical > div > div {
+    right: 0;
+}
+.slider:not(.vertical) > div > div {
+    top: 0;
+}
+
+/* ball */
+.slider > div > div:after {
+    content: " ";
+    position: absolute;
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    top: -0.5em;
+    right: -0.5em;
+    transform: translate(1px, 1px);
+    background-color: var(--fg);
+    transition: all 0.25s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.slider > div > div[style*="width:0%"]:after {
+    background-color: var(--bg);
+}
+
+.slider.vertical > div > div {
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.slider:not(.vertical) > div > div {
+    top: 0 !important;
+    bottom: 0 !important;
+}
+
+.slider label {
+    width: 2em;
+    height: 2em;    
+    margin: 0 1ex;
+}
+
+.slider input {
+    width: 3em;
+    height: 2em;
+    position: relative;
+    border: none;
+    top: 0;
+    padding: 0;
+    height: 100%;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+input:focus {
+    outline: none;
+    
 }
