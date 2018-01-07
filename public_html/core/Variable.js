@@ -1,0 +1,4 @@
+var Variable = {
+    REGISTERED_EVENT_LISTENERS: 0,
+    INSTANCES_WITH_DESTRUCTOR: 0
+};
