@@ -89,11 +89,12 @@ BasicElement.prototype.hookRequest = function(name, callback) {
  */
 BasicElement.prototype.destroy = function() {
     for(var i in this.hooks) {
-        for(var j in this.hooks[i])
-            this.hooks[i].action(this.hooks[i].pop([j]));
+        while(this.hooks[i].list.length > 0)
+            this.hooks[i].action(this.hooks[i].list.pop());
         delete this.hooks[i].list;
         delete this.hooks[i].action;
         delete this.hooks[i];
     }
     Variable.BASIC_ELEMENTS--;
+    return true;
 };
