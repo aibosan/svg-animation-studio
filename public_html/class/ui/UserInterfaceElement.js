@@ -11,7 +11,8 @@ function UserInterfaceElement(tagName, options, attributes) {
     attributes = attributes || {};
     options = options || {};
     options.event = options.event || {};
-    this.eventListeners = options.event;
+    this.name = options.name || null;
+    this.eventListeners = [];
     this.element = options.element ? options.element : document.createElement(tagName);
     for(var i in attributes) {
         this.element.setAttribute(i, attributes[i]);
@@ -19,7 +20,7 @@ function UserInterfaceElement(tagName, options, attributes) {
     for(var i in options.event) {
         if(typeof options.event[i] !== "function")
             continue;
-        this.element.addEventListener(i, options.event[i], false);
+        this.element.addEventListener(i, this.registerEventListener(i, options.event[i], false), false);
     }
     this.element.classList.add("ui");
     if(options.parent instanceof Element) {
@@ -29,6 +30,8 @@ function UserInterfaceElement(tagName, options, attributes) {
             options.parent.appendChild(this.element);
         }
     }
+    Variable.INSTANCES_WITH_DESTRUCTOR++;
+    return this;
 };
 
 /**
@@ -54,18 +57,26 @@ UserInterfaceElement.prototype.infest = function(element) {
 
 /**
  * Destructor
+ * @argument {boolean|null} recursive default false
  * @returns {Boolean}
  */
-UserInterfaceElement.prototype.destroy = function() {
+UserInterfaceElement.prototype.destroy = function(recursive) {
     if(this.element && this instanceof UserInterfaceElement) {
         return this.infest().destroy();
     }
-    for(var i in this.eventListeners) {
-        this.removeEventListener(i, this.eventListeners[i]);
+    for(var i = 0; i < this.eventListeners.length; i++) {
+        this.eventListeners[i].target.removeEventListener(this.eventListeners[i].name, this.eventListeners[i].function, this.eventListeners[i].capture);
+        Variable.REGISTERED_EVENT_LISTENERS--;
     }
     if(this.parentNode) {
         this.parentNode.removeChild(this);
     }
+    for(var i = 0; i < this.children.length; i++) {
+        if(typeof this.children[i].destroy === "function") {
+            this.children[i].destroy(recursive);
+        }
+    }
+    Variable.INSTANCES_WITH_DESTRUCTOR--;
     return true;
 }
 
@@ -124,4 +135,33 @@ UserInterfaceElement.prototype.enable = function() {
     this.removeAttribute("disabled");
     dispatch("enabled", this);
     return this;
+};
+
+/**
+ * Returns bounding client rectangle equivalent for content (no margin/padding/borders) of element
+ * @param {Element|null} element
+ * @returns {DOMRect}
+ */
+UserInterfaceElement.prototype.getContentRect = function(element) {
+    var bRect = (element || this).getBoundingClientRect();
+    var style = window.getComputedStyle(element || this);
+    return new DOMRect(
+        (bRect.x + parseFloat(style.paddingTop) + parseFloat(style.borderTopWidth) + parseFloat(style.marginTop)),
+        (bRect.y + parseFloat(style.paddingLeft) + parseFloat(style.borderLeftWidth) + parseFloat(style.marginLeft)),
+        parseFloat(style.width), parseFloat(style.height)
+    );   
+};
+
+/**
+ * Registers event listener to remove during destruction
+ * @param {string} event name of event
+ * @param {function} funct callback function
+ * @param {boolean|null} capture
+ * @param {Element|null} target (optional) target of event listener
+ * @returns {function} funct
+ */
+UserInterfaceElement.prototype.registerEventListener = function(eventName, funct, capture, target) {
+    this.eventListeners.push({ "target": target || this, "name": eventName, "function": funct, "capture": capture });
+    Variable.REGISTERED_EVENT_LISTENERS++;
+    return funct;
 };
