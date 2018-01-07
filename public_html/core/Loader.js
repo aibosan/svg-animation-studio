@@ -41,21 +41,19 @@ Loader.prototype.addList = function(listURL, resolve, reject) {
 
 /**
  * Loads all files in queue
- * @param {String|null} listURL optional list to add before loading
+ * @param {String|null} url file to load
  * @param {function|null} resolve callback after successfully finishing loading
  * @param {function|null} reject callback when problem occurs
  * @returns {Boolean}
  */
-Loader.prototype.load = function(listURL, resolve, reject) {
+Loader.prototype.load = function(url, resolve, reject) {
     if(!this.ready) {
         return false;
     }
     this.ready = false;
-    if(listURL) {
-        this.addList(listURL, this.readNext.bind(this, resolve, reject), reject);
-    } else {
-        this.readNext(resolve, reject);
-    }
+    if(url)
+        this.queue.push(url);
+    this.readNext(resolve, reject);
 };
 
 Loader.prototype.readNext = function(resolve, reject) {
@@ -129,10 +127,16 @@ Loader.prototype.readNext = function(resolve, reject) {
     }
 };
 
+/**
+ * Asynchronously chain-loads all classes and instances all singletons
+ * @returns {undefined}
+ */
 window.onload = function() {
+    window.singletons = [];
     requestAnimationFrame(function() {
         new Loader().load("core/main.list", function() {
-            window.Manager=new window.Manager();
+            while(singletons.length > 0)
+                new window[singletons.pop()]();
         });
     });
 };
