@@ -48,7 +48,7 @@ function Toggle(options, attributes) {
         this.element.appendChild(element);
     }
     
-    this.element.addEventListener('click', this.select.bind(this.element));
+    this.element.addEventListener('click', this.registerEventListener("click", this.set.bind(this.element)));
     
     if(this.state === null) {
         this.state = 0;
@@ -62,7 +62,7 @@ function Toggle(options, attributes) {
 
 Toggle.prototype = Object.create(UserInterfaceElement.prototype);
 
-Toggle.prototype.select = function(number) {
+Toggle.prototype.set = function(number, silent) {
     if(number === undefined || number === null || isNaN(number))
         number = this.state + 1;
     if(!this.children[number])
@@ -76,6 +76,7 @@ Toggle.prototype.select = function(number) {
     this.children[this.state].classList.remove("hidden");
     for(var i = 0; i < this.children[this.state].classList.length; i++)
         this.classList.add(this.children[this.state].classList[i]);
-    dispatch("toggled", this);
+    if(silent !== true)
+        dispatch("changed"+(this.name ? "-"+this.name : ""), this.state);
     return this;
 };

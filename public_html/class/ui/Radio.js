@@ -13,19 +13,17 @@ function Radio(options, attributes) {
     
     this.nextRadio = null;
     this.firstRadio = this.element;
-    this.value = 0;
+    this.number = options.number || 0;
     
     if(options.checked || options.on || !options.off || options.value) {
         this.element.classList.add("checked");
         this.checked = true;
     }
     
-    this.element.addEventListener('click', function() {
-        if(this.checked)
-            return;
-        this.on();
-        dispatch("clicked", this);
-    }.bind(this.element), false);
+    this.element.addEventListener('click', this.registerEventListener("click", function() {
+        if(!this.checked)
+            this.on();
+    }.bind(this.element)));
     
     return this.infest();
 };
@@ -55,13 +53,16 @@ Radio.prototype.add = function(radio) {
 
 /**
  * Sets button as on and sets all other radio buttons in group to off
+ * @argument {boolean|null} silent doe not pass event
  * @returns {Radio} self
  */
-Radio.prototype.on = function() {
+Radio.prototype.on = function(silent) {
     if(this.firstRadio)
         this.firstRadio.off(true);
     this.checked = true;
     this.classList.add("checked");
+    if(silent !== true)
+        dispatch("changed"+(this.name ? "-"+this.name : ""), this.number);
     return this;
 };
 

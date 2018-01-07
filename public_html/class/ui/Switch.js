@@ -9,17 +9,14 @@ function Switch(options, attributes) {
         this.on = true;
     }
     
-    this.element.addEventListener('click', function() {
-        this.toggle();
-        dispatch("clicked", this);
-    }.bind(this.element), false);
+    this.element.addEventListener('click', this.registerEventListener("click", this.toggle.bind(this.element)));
     
     return this.infest();
 };
 
 Switch.prototype = Object.create(UserInterfaceElement.prototype);
 
-Switch.prototype.toggle = function() {
+Switch.prototype.toggle = function(silent) {
     if(this.on) {
         this.classList.remove("on");
         this.on = false;
@@ -27,4 +24,6 @@ Switch.prototype.toggle = function() {
         this.classList.add("on");
         this.on = true;
     }
+    if(silent !== true)
+        dispatch("changed"+(this.name ? "-"+this.name : ""), this.on);
 };
