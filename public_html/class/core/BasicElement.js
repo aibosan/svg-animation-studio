@@ -87,7 +87,7 @@ BasicElement.prototype.hookRequest = function(name, callback) {
  * Destroys element; goes through hooks and calls their action onto each item in their list
  * @returns {undefined}
  */
-BasicElement.destroy = function() {
+BasicElement.prototype.destroy = function() {
     for(var i in this.hooks) {
         for(var j in this.hooks[i])
             this.hooks[i].action(this.hooks[i].pop([j]));
