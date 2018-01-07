@@ -270,6 +270,7 @@ button.toggle .hidden {
     position: relative;
     height: 2em;
     line-height: 2em;
+    bottom: 0.25em;
 }
 
 .slider > * {
@@ -340,7 +341,7 @@ button.toggle .hidden {
 }
 
 .slider input {
-    width: 3em;
+    min-width: 3em;
     height: 2em;
     position: relative;
     border: none;

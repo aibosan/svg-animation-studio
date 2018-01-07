@@ -11,7 +11,8 @@ function Slider(options, attributes) {
     this.value = options.value || 0;
     this.min = options.min || 0;
     this.max = options.max || 100;
-    this.step = options.step || 1;
+    this.value = this.value > this.max ? this.max : this.value < this.min ? this.min : this.value;
+    this.step = options.step || Math.ceil((this.max-this.min)/25);
     
     if(options.label) {
         var text = document.createElement("label");
@@ -83,14 +84,18 @@ Slider.prototype.set = function(value, silent) {
         value = this.min;
     if(value > this.max)
         value = this.max;
-    value -= (value % this.step);
+    if(value !== this.min && value !== this.max)
+        value -= (value % this.step);
+    if(this.value === value)
+        return this.value;
     this.value = value;
     if(this.classList.contains("vertical"))
         this.slider.style.height = 100*((this.value-this.min)/(this.max-this.min)) + "%";
     else
         this.slider.style.width = 100*(this.value-this.min)/(this.max-this.min) + "%";
     
-    this.input.value = Math.round(this.value);
+    if(this.input)
+        this.input.value = this.step%1 > 0.01 ? this.value.toFixed(1) : Math.round(this.value);
     if(typeof this.change === "function")
         this.change(this.value);
     if(silent !== true)
