@@ -2,5 +2,6 @@
     "config/core.json",
     "style/color.css",
     "class/core/BasicElement.js",
-    "class/core/EventManager.js"
+    "config/language/english.json",
+    "class/core/Language.js"
 ]

@@ -57,9 +57,10 @@ Loader.prototype.load = function(url, resolve, reject) {
 };
 
 Loader.prototype.readNext = function(resolve, reject) {
-    if(!window.config) {
+    if(!window.config)
         window.config = {};
-    }
+    if(!window.language)
+        window.language = {};
     if(this.queue.length === 0) {
         this.ready = true;
         if(typeof resolve === "function") {
@@ -99,20 +100,30 @@ Loader.prototype.readNext = function(resolve, reject) {
             }.bind(this);
             break;
         case "json":
-            parse = function(content) {
+            parse = candidate.match("config/language/") ? function(content) {
                 try {
                     var parsed = JSON.parse(content);
-                    for(var i in parsed) {
-                        window.config[i] = parsed[i];
-                    }
+                    window.language[candidate.toLowerCase().replace(/.*\//, '').replace(/\..*/, '')] = parsed;
                 } catch(error) {
                     log("config file could not be parsed", {
                         'fileURL': listURL, 'fileContent': content },
                         Log.Level.WARNING);
-                    if(typeof reject === "function") {
-                        reject();                
-                        return;
-                    }
+                    if(typeof reject === "function")
+                        return reject();
+                } finally {
+                    this.readNext(resolve, reject);
+                }
+            }.bind(this) : function(content) {
+                try {
+                    var parsed = JSON.parse(content);
+                    for(var i in parsed)
+                        window.config[i] = parsed[i];
+                } catch(error) {
+                    log("config file could not be parsed", {
+                        'fileURL': listURL, 'fileContent': content },
+                        Log.Level.WARNING);
+                    if(typeof reject === "function")
+                        return reject();
                 } finally {
                     this.readNext(resolve, reject);
                 }
@@ -121,6 +132,7 @@ Loader.prototype.readNext = function(resolve, reject) {
     }
     
     if(typeof parse === "function") {
+        console.log(candidate);
         fileRead(candidate, parse, reject);
     } else {
         this.readNext(resolve, reject);
