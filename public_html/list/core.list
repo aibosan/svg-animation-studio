@@ -1,5 +1,6 @@
 [
     "config/core.json",
     "style/color.css",
-    "class/core/Manager.js"
+    "class/core/Manager.js",
+    "class/core/EventManager.js"
 ]
