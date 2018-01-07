@@ -5,14 +5,16 @@
  * @argument {Object|null} attributes container's attributes
  */
 function UserInterfaceElement(tagName, options, attributes) {
+    options = options || {};
     if(!tagName && !options.element) {
         return this;
     }
+    BasicElement.call(this);
     attributes = attributes || {};
     options = options || {};
     options.event = options.event || {};
     this.name = options.name || null;
-    this.eventListeners = [];
+    
     this.element = options.element ? options.element : document.createElement(tagName);
     for(var i in attributes) {
         this.element.setAttribute(i, attributes[i]);
@@ -20,7 +22,7 @@ function UserInterfaceElement(tagName, options, attributes) {
     for(var i in options.event) {
         if(typeof options.event[i] !== "function")
             continue;
-        this.element.addEventListener(i, this.registerEventListener(i, options.event[i], false), false);
+        this.hookEventListener(this.element, i, options.event[i]);
     }
     this.element.classList.add("ui");
     if(options.parent instanceof Element) {
@@ -30,9 +32,11 @@ function UserInterfaceElement(tagName, options, attributes) {
             options.parent.appendChild(this.element);
         }
     }
-    Variable.INSTANCES_WITH_DESTRUCTOR++;
+    Variable.USER_INTERFACE_ELEMENTS++;
     return this;
 };
+
+UserInterfaceElement.prototype = Object.create(BasicElement.prototype);
 
 /**
  * Merges with the DOM element, migrating object properties there
@@ -64,21 +68,14 @@ UserInterfaceElement.prototype.destroy = function(recursive) {
     if(this.element && this instanceof UserInterfaceElement) {
         return this.infest().destroy();
     }
-    for(var i = 0; i < this.eventListeners.length; i++) {
-        this.eventListeners[i].target.removeEventListener(this.eventListeners[i].name, this.eventListeners[i].function, this.eventListeners[i].capture);
-        Variable.REGISTERED_EVENT_LISTENERS--;
-    }
-    if(this.parentNode) {
-        this.parentNode.removeChild(this);
-    }
     for(var i = 0; i < this.children.length; i++) {
         if(typeof this.children[i].destroy === "function") {
             this.children[i].destroy(recursive);
         }
     }
-    Variable.INSTANCES_WITH_DESTRUCTOR--;
-    return true;
-}
+    Variable.USER_INTERFACE_ELEMENTS--;
+    return BasicElement.prototype.destroy.call(this);       // "inheritance"
+};
 
 /**
  * Hides UI element
@@ -152,16 +149,12 @@ UserInterfaceElement.prototype.getContentRect = function(element) {
     );   
 };
 
-/**
- * Registers event listener to remove during destruction
- * @param {string} event name of event
- * @param {function} funct callback function
- * @param {boolean|null} capture
- * @param {Element|null} target (optional) target of event listener
- * @returns {function} funct
- */
-UserInterfaceElement.prototype.registerEventListener = function(eventName, funct, capture, target) {
-    this.eventListeners.push({ "target": target || this, "name": eventName, "function": funct, "capture": capture });
-    Variable.REGISTERED_EVENT_LISTENERS++;
-    return funct;
+UserInterfaceElement.prototype.listenerSet = function(attributes) {
+    if(typeof this.set !== "function" || this.value === undefined)
+        return true;
+    if(typeof attributes === typeof this.value || attributes === null || attributes === undefined)
+        this.set(attributes);
+    else if(typeof attributes === "object" && attributes.value !== null && attributes.value !== undefined) 
+        this.set(attributes.value, attributes.silent);
 };
+
