@@ -73,7 +73,6 @@ Radio.prototype.on = function(silent) {
  */
 Radio.prototype.off = function(recursive) {
     this.checked = false;
-    console.log(this);
     this.classList.remove("checked");
     if(recursive && this.nextRadio)
         this.nextRadio.off(recursive);
