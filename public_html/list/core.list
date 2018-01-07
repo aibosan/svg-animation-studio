@@ -1,6 +1,7 @@
 [
     "config/core.json",
     "style/color.css",
+    "class/core/BasicElement.js",
     "class/core/Manager.js",
     "class/core/EventManager.js"
 ]
