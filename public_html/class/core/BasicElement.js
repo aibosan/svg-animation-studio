@@ -7,18 +7,22 @@ var BasicElement = function() {
         "eventListeners": { 
             "action": function(item) {      // this is function called for every item of the list during destruction
                 item.target.removeEventListener(item.name, item.function, item.capture);
+                Variable.REGISTERED_EVENT_LISTENERS--;
                 delete item.function;
             }, "list": [] },
         "globals": { 
             "action": function(item) {      // this is function called for every item of the list during destruction
                 removeGlobal(item.name, item.function);
                 delete item.function;
+                Variable.REGISTERED_GLOBALS--;
             }, "list": [] },
         "requests": { 
             "action": function(item) {      // this is function called for every item of the list during destruction
                 forgetRequest(item.name);
+                Variable.REGISTERED_REQUESTS--;
             }, "list": [] }
     };
+    Variable.BASIC_ELEMENTS++;
 };
 
 /**
@@ -41,6 +45,7 @@ BasicElement.prototype.hookEventListener = function(target, event, callback, opt
     this.hooks.eventListeners.list.push({
         "name": event, "function": callback, "capture": capture
     });
+    Variable.REGISTERED_EVENT_LISTENERS++
     return callback;
 };
 
@@ -57,6 +62,7 @@ BasicElement.prototype.hookGlobal = function(name, callback) {
     this.hooks.globals.list.push({
         "name": name, "function": callback
     });
+    Variable.REGISTERED_GLOBALS++;
     return callback;
 };
 
@@ -73,6 +79,7 @@ BasicElement.prototype.hookRequest = function(name, callback) {
     this.hooks.requests.list.push({
         "name": name, "function": callback
     });
+    Variable.REGISTERED_REQUESTS++;
     return callback;
 };
 
@@ -88,4 +95,5 @@ BasicElement.destroy = function() {
         delete this.hooks[i].action;
         delete this.hooks[i];
     }
+    Variable.BASIC_ELEMENTS--;
 };
