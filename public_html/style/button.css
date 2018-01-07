@@ -3,7 +3,7 @@
     border-radius: 2px;
 }
 
-button {
+.button {
     position: relative;
     min-width: 4em;
     height: 2.5em;
@@ -12,7 +12,6 @@ button {
     overflow: hidden;
     outline: none;
     transition:
-        font-weight 0.25s cubic-bezier(0.0, 0.0, 0.2, 1),
         background-color 0.25s cubic-bezier(0.0, 0.0, 0.2, 1),
         box-shadow 0.15s cubic-bezier(0.0, 0.0, 0.2, 1);
     text-align: center;
@@ -25,31 +24,31 @@ button {
     z-index: 0;
 }
 
-button[disabled], button.disabled {
+.button[disabled], .button.disabled {
     cursor: default !important;
     opacity: 0.30;
     color: var(--text);
     background-color: var(--bg);
 }
-button.raised[disabled]:before, button.raised.disabled:before,
-button.floating[disabled]:before, button.floating.disabled:before {
+.button.raised[disabled]:before, .button.raised.disabled:before,
+.button.floating[disabled]:before, .button.floating.disabled:before {
     opacity: 0.5;
 }
-button:before {
+.button:before {
     opacity: 0.0;
 }
 
-button.raised:before, button.floating:before {
+.button.raised:before, .button.floating:before {
     opacity: 0.1;
 }
-button:not([disabled]):not(.disabled):active:before {
+.button:not([disabled]):not(.disabled):active:before {
     opacity: 0.2;
 }
-button:not([disabled]):not(.disabled):active:before {
+.button:not([disabled]):not(.disabled):active:before {
     opacity: 0.4;
 }
 
-button:before {
+.button:before {
     position: absolute;
     top: 0;
     left: 0;
@@ -60,7 +59,7 @@ button:before {
     background: #999;
 }
 
-button:after {
+.button:after {
     position: absolute;
     top: -1em;
     left: 51%;
@@ -81,33 +80,33 @@ button:after {
     100% { left: 5%; right: 5%; }
 }
 
-button:active:after {
+.button:active:after {
     animation: button-active 2s ease-in-out 0.75s infinite;
     left: 5%;
     right: 5%;
 }
 
 /* Flat */
-button {
+.button {
     color: var(--text);
     background-color: var(--bg);
 }
 
 /* Dark */
-button.dark:not([disabled]):not(.disabled) {
+.button.dark:not([disabled]):not(.disabled) {
     color: var(--fg);
     background-color: var(--bg);
 }
 
-button.dark.raised:not([disabled]):not(.disabled),
-button.dark.floating:not([disabled]):not(.disabled) {
+.button.dark.raised:not([disabled]):not(.disabled),
+.button.dark.floating:not([disabled]):not(.disabled) {
     color: var(--bg);
     background-color: var(--fg);
 }
 
 
 /* Toggle */
-button.toggle .hidden {
+.button.toggle .hidden {
     display: none;
 }
 

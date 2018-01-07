@@ -38,33 +38,34 @@ function Slider(options, attributes) {
         this.input.setAttribute("value", this.value);
         this.element.appendChild(this.input);
         
-        this.input.addEventListener("change", this.registerEventListener("change", function(event) {
+        this.hookEventListener(this.input, "change", function(event) {
             var value = parseFloat(event.currentTarget.value);
             if(this.value !== value)
                 this.set(value);
-        }.bind(this.element)));
+        }.bind(this.element));
     }
     
-    this.container.addEventListener("mousedown", this.registerEventListener("mousedown", function() {
-        this.active = true;
-    }.bind(this.element)));
-    window.addEventListener("mouseup", this.registerEventListener("mouseup", function() {
-        this.active = false;
-    }.bind(this.element)));
-    this.container.addEventListener("click", this.registerEventListener("click", this.eventHandler.bind(this.element)));
-    this.container.addEventListener("mousemove", this.registerEventListener("mousemove", function(event) {
+    this.hookEventListener(this.container, "mousedown", function() { this.active = true; }.bind(this.element));
+    this.hookEventListener(window, "mouseup", function() { this.active = false; }.bind(this.element));
+    this.hookEventListener(this.container, "click", this.eventHandler.bind(this.element));
+    this.hookEventListener(this.container, "mousemove", function(event) { 
         if(this.active && (event.buttons & 1)) {
             this.eventHandler(event);
         }
-    }.bind(this.element)));
-    this.element.addEventListener("wheel", this.registerEventListener("wheel", function(event) {
+    }.bind(this.element));
+    this.hookEventListener(this.element, "wheel", function(event) {
         if(event.deltaY === 0)
             return;
         if(event.deltaY > 0)
             this.set(this.value - this.step);
         else
             this.set(this.value + this.step);
-    }.bind(this.element)));
+    }.bind(this.element));
+    
+    if(this.name) {
+        this.hookGlobal("set-"+this.name, this.listenerSet.bind(this.element));
+        this.hookRequest("get-"+this.name, function(){return this.value}.bind(this.element));
+    }
     
     return this.infest();
 };
@@ -78,7 +79,7 @@ Slider.prototype = Object.create(UserInterfaceElement.prototype);
  * @returns {number} final value
  */
 Slider.prototype.set = function(value, silent) {
-    if(value === this.value)
+    if(value === this.value || value === undefined || value === null)
         return this.value;
     if(value < this.min)
         value = this.min;

@@ -2,30 +2,35 @@ function Checkbox(options, attributes) {
     UserInterfaceElement.call(this, "div", options, attributes);
     this.element.classList.add("checkbox");
     
-    this.checked = false;
+    this.value = false;
     
     if(options.checked || options.on || !options.off || options.value) {
         this.element.classList.add("checked");
-        this.checked = true;
+        this.value = true;
     }
     
-    this.element.addEventListener('click', 
-        this.registerEventListener("click", this.toggle.bind(this.element))
-    );
+   this.hookEventListener(this.element, "click", this.set.bind(this.element));
+    if(this.name) {
+        this.hookGlobal("set-"+this.name, this.listenerSet.bind(this.element));
+        this.hookRequest("get-"+this.name, function(){return this.value}.bind(this.element));
+    }
     
     return this.infest();
 };
 
 Checkbox.prototype = Object.create(UserInterfaceElement.prototype);
 
-Checkbox.prototype.toggle = function(silent) {
-    if(this.checked) {
-        this.classList.remove("checked");
-        this.checked = false;
-    } else {
+Checkbox.prototype.set = function(toChecked, silent) {
+    if(toChecked === this.value)
+        return;
+    if(typeof toChecked !== "boolean")
+        toChecked = !this.value;
+    if(toChecked) {
         this.classList.add("checked");
-        this.checked = true;
+    } else {
+        this.classList.remove("checked");
     }
+    this.value = toChecked;
     if(silent !== true)
         dispatch("changed"+(this.name ? "-"+this.name : ""), this.value);
             

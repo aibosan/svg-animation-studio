@@ -5,8 +5,8 @@
  * @returns {HTMLButtonElement}
  */
 function Toggle(options, attributes) {
-    options = options || { };
-    UserInterfaceElement.call(this, "button", options, attributes);
+    UserInterfaceElement.call(this, "div", options, attributes);
+    this.element.classList.add("button");
     this.element.classList.add("toggle");
     
     if(Array.isArray(options)) {
@@ -19,7 +19,7 @@ function Toggle(options, attributes) {
         return null;
     }
     
-    this.state = null;
+    this.value = null;
     
     for(var i = 0; i < options.states.length; i++) {
         var element = document.createElement("span");
@@ -39,7 +39,7 @@ function Toggle(options, attributes) {
             if(options.states[i].class)
                 element.classList.add(options.states[i].class);
             if(options.states[i].selected)
-                this.state = i;
+                this.value = i;
             if(options.states[i].onClick)
                 element.addEventListener('click', options.states[i].onClick);
         } else if(options.states[i] instanceof HTMLElement) {
@@ -48,14 +48,19 @@ function Toggle(options, attributes) {
         this.element.appendChild(element);
     }
     
-    this.element.addEventListener('click', this.registerEventListener("click", this.set.bind(this.element)));
-    
-    if(this.state === null) {
-        this.state = 0;
+    if(this.value === null) {
+        this.value = 0;
     }
-    this.element.children[this.state].classList.remove("hidden");
-    for(var i = 0; i < this.element.children[this.state].classList.length; i++)
-        this.element.classList.add(this.element.children[this.state].classList[i]);
+    
+    this.element.children[this.value].classList.remove("hidden");
+    for(var i = 0; i < this.element.children[this.value].classList.length; i++)
+        this.element.classList.add(this.element.children[this.value].classList[i]);
+        
+    this.hookEventListener(this.element, "click", this.set.bind(this.element));
+    if(this.name) {
+        this.hookGlobal("set-"+this.name, this.listenerSet.bind(this.element));
+        this.hookRequest("get-"+this.name, function(){return this.value}.bind(this.element));
+    }
     
     return this.infest();
 };
@@ -64,19 +69,20 @@ Toggle.prototype = Object.create(UserInterfaceElement.prototype);
 
 Toggle.prototype.set = function(number, silent) {
     if(number === undefined || number === null || isNaN(number))
-        number = this.state + 1;
+        number = this.value + 1;
     if(!this.children[number])
         number = 0;
-    if(this.state !== null && this.children[number]) {
-        for(var i = 0; i < this.children[this.state].classList.length; i++)
-            this.classList.remove(this.children[this.state].classList[i]);
-        this.children[this.state].classList.add("hidden");
+    if(this.value !== null && this.children[number]) {
+        for(var i = 0; i < this.children[this.value].classList.length; i++)
+            this.classList.remove(this.children[this.value].classList[i]);
+        this.children[this.value].classList.add("hidden");
     }
-    this.state = number;
-    this.children[this.state].classList.remove("hidden");
-    for(var i = 0; i < this.children[this.state].classList.length; i++)
-        this.classList.add(this.children[this.state].classList[i]);
-    if(silent !== true)
-        dispatch("changed"+(this.name ? "-"+this.name : ""), this.state);
+    this.value = number;
+    this.children[this.value].classList.remove("hidden");
+    for(var i = 0; i < this.children[this.value].classList.length; i++)
+        this.classList.add(this.children[this.value].classList[i]);
+    if(silent !== true) {
+        dispatch("changed"+(this.name ? "-"+this.name : ""), this.value);
+    }
     return this;
 };

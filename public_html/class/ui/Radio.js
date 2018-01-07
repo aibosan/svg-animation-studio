@@ -9,21 +9,23 @@ function Radio(options, attributes) {
     this.element.classList.add("checkbox");
     this.element.classList.add("radio");
     
-    this.checked = false;
+    this.value = true;
+    this.element.classList.add("checked");
     
     this.nextRadio = null;
     this.firstRadio = this.element;
     this.number = options.number || 0;
     
-    if(options.checked || options.on || !options.off || options.value) {
-        this.element.classList.add("checked");
-        this.checked = true;
+    if(options.value === false) {
+        this.element.classList.remove("checked");
+        this.value = false;
     }
     
-    this.element.addEventListener('click', this.registerEventListener("click", function() {
-        if(!this.checked)
-            this.on();
-    }.bind(this.element)));
+    this.hookEventListener(this.element, "click", this.set.bind(this.element));
+    if(this.name) {
+        this.hookGlobal("set-"+this.name, this.listenerSet.bind(this.element));
+        this.hookRequest("get-"+this.name, function(){return this.value}.bind(this.element));
+    }
     
     return this.infest();
 };
@@ -39,15 +41,12 @@ Radio.prototype.add = function(radio) {
     if(radio === this) {
         return this;
     }
-    if(this.nextRadio) {
-        return this.nextRadio.add(radio);
-    }
+    var oldNext = this.nextRadio;
     radio.firstRadio = this.firstRadio;
     this.nextRadio = radio;
-    if(this.checked && this.nextRadio.checked) {
-        this.nextRadio.checked = false;
-        this.nextRadio.classList.remove("checked");
-    }
+    if(oldNext)
+        this.nextRadio.add(oldNext);
+    this.firstRadio.check();
     return radio;
 };
 
@@ -59,11 +58,18 @@ Radio.prototype.add = function(radio) {
 Radio.prototype.on = function(silent) {
     if(this.firstRadio)
         this.firstRadio.off(true);
-    this.checked = true;
+    this.value = true;
     this.classList.add("checked");
     if(silent !== true)
         dispatch("changed"+(this.name ? "-"+this.name : ""), this.number);
     return this;
+};
+
+Radio.prototype.set = function(value, silent) {
+    if(value === false)
+        this.off();
+    else
+        this.on(silent);
 };
 
 /**
@@ -72,9 +78,22 @@ Radio.prototype.on = function(silent) {
  * @returns {Radio}
  */
 Radio.prototype.off = function(recursive) {
-    this.checked = false;
+    this.value = false;
     this.classList.remove("checked");
     if(recursive && this.nextRadio)
         this.nextRadio.off(recursive);
     return this;
+};
+
+/**
+ * Checks the chain of buttons to avoid multiple checked ones
+ * @returns {Boolean}
+ */
+Radio.prototype.check = function() {
+    if(this.nextRadio && this.nextRadio !== this)
+        if(this.value)
+            this.nextRadio.off(true);
+        else
+            return this.nextRadio.check();
+    return true;
 };
